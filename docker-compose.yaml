@@ -1,0 +1,24 @@
+# We're using version 3.7 of the Docker Compose file format
+version: "3"
+
+# Define services/containers
+services:
+  rabbitui:
+    container_name: con_rabbit
+    ports:
+      - "0.0.0.0:15672:15672"
+      - "0.0.0.0:5672:5672"
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+  redis:
+    image: redis:latest
+    container_name: con_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/data/dvolumes/ausfinex/docker-redis:/data"
+
+networks:
+  my-network:
